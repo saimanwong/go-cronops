@@ -7,6 +7,7 @@ import (
 
 	"github.com/saimanwong/go-cronops/internal/config"
 	"github.com/saimanwong/go-cronops/internal/logger"
+
 	"github.com/saimanwong/go-cronops/internal/plugin"
 
 	"github.com/mitchellh/mapstructure"
@@ -95,6 +96,13 @@ func (c *Cron) add(id config.TaskID, t config.Task) error {
 		switch t.Plugin {
 		case "example":
 			d := plugin.NewExample()
+			err := mapstructure.Decode(t.Params, &d)
+			if err != nil {
+				return err
+			}
+			job = d
+		case "jiraslack":
+			d := plugin.NewJiraSlack()
 			err := mapstructure.Decode(t.Params, &d)
 			if err != nil {
 				return err

@@ -16,3 +16,28 @@ tasks:
     plugin: example
     params:
       msg: hello world 2
+
+  jiratoslack:
+    name: Jira to Slack
+    enabled: true
+    cron: "@every 5s"
+    plugin: jiraslack
+    params:
+      jiraUrl: ""
+      jiraUsername: ""
+      jiraPassword: "" # base64 encoding
+      jiraJQL: |
+        project = TEST and
+        'Epic link' = HELLO2 and
+        Status != Done
+      jiraIgnoreIssues: []
+      jiraIgnoreSummaries: []
+
+      slackToken: "" # base64 encoding
+      slackChannelID: ""
+      slackFirstMsgTitle: This is my title (no markdown support)
+      slackFirstMsgText: |
+        Text can use *mark*`down`! 🎉
+        Found %total_jira_issues% issue(s)
+        <https://github.com/saimanwong/go-cronops>
+      slackAttachmentColor: "#EE82EE"
