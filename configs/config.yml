@@ -1,0 +1,18 @@
+---
+
+tasks:
+  example:
+    name: Example task
+    enabled: true
+    cron: "@every 5s"
+    plugin: example
+    params:
+      msg: hello world
+
+  example2:
+    name: Example task disabled
+    # enabled: true
+    cron: "@every 10s"
+    plugin: example
+    params:
+      msg: hello world 2
